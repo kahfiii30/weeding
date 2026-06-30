@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const RSVP = () => {
+  const { slug } = useParams();
   const [formData, setFormData] = useState({
     name: '',
     guests: '1',
@@ -11,11 +13,11 @@ const RSVP = () => {
   const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
-    const saved = localStorage.getItem('wedding_demo_rsvp');
+    const saved = localStorage.getItem(`wedding_${slug}_rsvp`);
     if (saved) {
       setRsvpList(JSON.parse(saved));
     }
-  }, []);
+  }, [slug]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,7 +36,7 @@ const RSVP = () => {
 
     const updatedList = [newEntry, ...rsvpList].slice(0, 5); // Keep only 5 latest
     setRsvpList(updatedList);
-    localStorage.setItem('wedding_demo_rsvp', JSON.stringify(updatedList));
+    localStorage.setItem(`wedding_${slug}_rsvp`, JSON.stringify(updatedList));
 
     setSubmitMessage('Terima kasih, konfirmasi Anda sudah tercatat.');
     setFormData({ name: '', guests: '1', attendance: 'Hadir', message: '' });

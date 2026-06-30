@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const Wishes = () => {
+  const { slug } = useParams();
   const [wishesList, setWishesList] = useState([]);
   const [formData, setFormData] = useState({ name: '', wish: '' });
 
   useEffect(() => {
-    const saved = localStorage.getItem('wedding_demo_wishes');
+    const saved = localStorage.getItem(`wedding_${slug}_wishes`);
     if (saved) {
       setWishesList(JSON.parse(saved));
     }
-  }, []);
+  }, [slug]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ const Wishes = () => {
 
     const updatedList = [newWish, ...wishesList].slice(0, 10);
     setWishesList(updatedList);
-    localStorage.setItem('wedding_demo_wishes', JSON.stringify(updatedList));
+    localStorage.setItem(`wedding_${slug}_wishes`, JSON.stringify(updatedList));
     
     setFormData({ name: '', wish: '' });
   };

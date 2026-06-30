@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Papa from 'papaparse';
 import { saveAs } from 'file-saver';
 
 const AdminDashboard = () => {
+  const { slug } = useParams();
   const [inputText, setInputText] = useState('');
   const [generatedLinks, setGeneratedLinks] = useState([]);
 
@@ -24,7 +26,7 @@ const AdminDashboard = () => {
       }
 
       const encodedName = encodeURIComponent(name);
-      const uniqueLink = `${window.location.origin}/?to=${encodedName}`;
+      const uniqueLink = `${window.location.origin}/${slug}?to=${encodedName}`;
       const waLink = number ? `https://wa.me/${number}?text=Halo ${encodedName}, Kami mengundang Anda untuk hadir di pernikahan kami. Berikut link undangannya: ${uniqueLink}` : '';
 
       return {
@@ -119,8 +121,8 @@ const AdminDashboard = () => {
           <button 
             onClick={() => {
               if (window.confirm('PERINGATAN: Yakin ingin menghapus SEMUA data RSVP dan Ucapan tamu secara permanen?')) {
-                localStorage.removeItem('wedding_demo_wishes');
-                localStorage.removeItem('wedding_demo_rsvp');
+                localStorage.removeItem(`wedding_${slug}_wishes`);
+                localStorage.removeItem(`wedding_${slug}_rsvp`);
                 alert('Semua data tamu berhasil dihapus!');
               }
             }}
