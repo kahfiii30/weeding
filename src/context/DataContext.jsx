@@ -4,20 +4,27 @@ import { invitationData as fallbackData } from '../data/invitationData';
 
 export const DataContext = createContext(fallbackData);
 
-export const DataProvider = ({ children }) => {
+export const DataProvider = ({ slug, children }) => {
   const [data, setData] = useState(fallbackData);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadExcelData = async () => {
+      if (!slug) {
+        setLoading(false);
+        return;
+      }
+      
       try {
-        const response = await fetch('/data.xlsx');
+        const response = await fetch(`/${slug}/data.xlsx`);
         if (!response.ok) throw new Error("Excel file not found");
         
         const arrayBuffer = await response.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
         
-        const excelData = { ...fallbackData }; // Start with fallback as base
+        const excelData = JSON.parse(JSON.stringify(fallbackData)); // Deep clone fallback
+
+        const prefixUrl = (url) => url.startsWith('/') ? `/${slug}${url}` : url;
 
         // Parse Mempelai
         if (workbook.Sheets['Mempelai']) {
@@ -28,14 +35,14 @@ export const DataProvider = ({ children }) => {
                 name: row.Nama || '',
                 nickname: row.Panggilan || '',
                 parents: row.OrangTua || '',
-                photo: row.Foto || ''
+                photo: row.Foto ? prefixUrl(row.Foto) : ''
               };
             } else if (row.Peran === 'Wanita') {
               excelData.couple.bride = {
                 name: row.Nama || '',
                 nickname: row.Panggilan || '',
                 parents: row.OrangTua || '',
-                photo: row.Foto || ''
+                photo: row.Foto ? prefixUrl(row.Foto) : ''
               };
             }
           });
@@ -68,7 +75,7 @@ export const DataProvider = ({ children }) => {
           const galeri = XLSX.utils.sheet_to_json(workbook.Sheets['Galeri']);
           excelData.gallery = galeri.map((row, index) => ({
             id: index + 1,
-            src: row.Foto || ''
+            src: row.Foto ? prefixUrl(row.Foto) : ''
           }));
         }
 
@@ -87,14 +94,14 @@ export const DataProvider = ({ children }) => {
 
         setData(excelData);
       } catch (err) {
-        console.warn('Failed to load Excel data, using fallback data.js', err);
+        console.warn('Failed to load Excel data, using fallback data', err);
       } finally {
         setLoading(false);
       }
     };
 
     loadExcelData();
-  }, []);
+  }, [slug]);
 
   if (loading) {
     return (
