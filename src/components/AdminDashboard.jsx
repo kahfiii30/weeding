@@ -115,6 +115,19 @@ const AdminDashboard = () => {
               Export ke CSV / Excel
             </button>
           )}
+
+          <button 
+            onClick={() => {
+              if (window.confirm('PERINGATAN: Yakin ingin menghapus SEMUA data RSVP dan Ucapan tamu secara permanen?')) {
+                localStorage.removeItem('wedding_demo_wishes');
+                localStorage.removeItem('wedding_demo_rsvp');
+                alert('Semua data tamu berhasil dihapus!');
+              }
+            }}
+            className="ml-auto bg-red-50 text-red-600 px-6 py-2 rounded-lg border border-red-200 hover:bg-red-100 transition-colors"
+          >
+            Hapus Semua Data Tamu
+          </button>
         </div>
 
         {generatedLinks.length > 0 && (

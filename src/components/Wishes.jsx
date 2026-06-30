@@ -29,16 +29,6 @@ const Wishes = () => {
     setFormData({ name: '', wish: '' });
   };
 
-  const clearData = () => {
-    if (window.confirm('Yakin ingin menghapus semua data demo ucapan?')) {
-      setWishesList([]);
-      localStorage.removeItem('wedding_demo_wishes');
-      localStorage.removeItem('wedding_demo_rsvp'); // Also clear RSVP for convenience
-      alert('Data demo berhasil dihapus.');
-      window.location.reload();
-    }
-  };
-
   return (
     <section className="py-20 px-4 bg-wedding-cream text-center">
       <div className="max-w-3xl mx-auto" data-aos="fade-up">
@@ -82,13 +72,6 @@ const Wishes = () => {
             <div className="text-center text-gray-500 text-sm py-4">Belum ada ucapan. Jadilah yang pertama!</div>
           )}
         </div>
-
-        <button 
-          onClick={clearData}
-          className="mt-12 text-xs text-red-400 hover:text-red-600 underline"
-        >
-          Hapus Semua Data Demo
-        </button>
       </div>
     </section>
   );

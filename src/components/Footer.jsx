@@ -11,7 +11,7 @@ const Footer = () => {
         <p className="font-body text-white/80 mb-12 italic">Terima kasih atas doa dan restunya</p>
         
         <div className="border-t border-white/10 pt-8 mt-8">
-          <p className="text-sm text-white/60 mb-2 font-medium tracking-wide uppercase">Digital Invitation by Demo Studio</p>
+          <p className="text-sm text-white/60 mb-2 font-medium tracking-wide uppercase">Digital Invitation by NikahLink</p>
           <p className="text-xs text-white/40">Cocok dipaketkan dengan undangan fisik + QR Code</p>
         </div>
       </div>
