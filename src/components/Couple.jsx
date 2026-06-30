@@ -1,7 +1,8 @@
 import React from 'react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const Couple = () => {
+  const invitationData = useData();
   return (
     <section id="couple" className="py-20 px-4 bg-white text-center">
       <div className="max-w-4xl mx-auto animate-slide-up">

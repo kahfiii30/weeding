@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Copy, CheckCircle } from 'lucide-react';
-import { invitationData } from '../data/invitationData';
+import { Gift as GiftIcon, Copy, CheckCircle2 } from 'lucide-react';
+import { useData } from '../context/DataContext';
 
 const Gift = () => {
+  const invitationData = useData();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Share2 } from 'lucide-react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const Share = () => {
+  const invitationData = useData();
+  
   const handleShare = () => {
     const currentUrl = window.location.href;
     const text = encodeURIComponent(`${invitationData.shareMessage}${currentUrl}`);

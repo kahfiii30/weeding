@@ -1,8 +1,9 @@
 import React from 'react';
 import { MapPin, Calendar, Clock } from 'lucide-react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const EventDetails = () => {
+  const invitationData = useData();
   return (
     <section id="acara" className="py-20 px-4 bg-wedding-cream text-center relative overflow-hidden">
       {/* Decorative Ornaments */}

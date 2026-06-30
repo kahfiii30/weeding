@@ -1,7 +1,8 @@
 import React from 'react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const Footer = () => {
+  const invitationData = useData();
   return (
     <footer className="py-16 px-4 bg-wedding-dark text-wedding-cream text-center pb-32 md:pb-16">
       <div className="max-w-2xl mx-auto">

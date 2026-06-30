@@ -1,7 +1,8 @@
 import React from 'react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const LoveStory = () => {
+  const invitationData = useData();
   return (
     <section className="py-20 px-4 bg-white text-center" data-aos="fade-up">
       <div className="max-w-4xl mx-auto">

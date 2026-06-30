@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const Hero = ({ onOpen }) => {
+  const invitationData = useData();
   const [guestName, setGuestName] = useState('Tamu Undangan');
 
   useEffect(() => {

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const Countdown = () => {
+  const invitationData = useData();
+  
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,

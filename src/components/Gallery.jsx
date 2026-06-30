@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Heart, X } from 'lucide-react';
-import { invitationData } from '../data/invitationData';
+import { useData } from '../context/DataContext';
 
 const Gallery = () => {
+  const invitationData = useData();
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
