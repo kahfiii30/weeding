@@ -90,8 +90,9 @@ export const DataProvider = ({ slug, children }) => {
             if (row.Kunci === 'AtasNama') excelData.gift.accountName = row.Nilai || '';
             if (row.Kunci === 'PesanShare') excelData.shareMessage = row.Nilai || '';
           });
-        }
-
+        // Update browser tab title dynamically
+        document.title = `The Wedding of ${excelData.couple.groom.nickname} & ${excelData.couple.bride.nickname}`;
+        
         setData(excelData);
       } catch (err) {
         console.warn('Failed to load Excel data, using fallback data', err);
